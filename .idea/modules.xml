@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/contatos/contatos.iml" filepath="$PROJECT_DIR$/contatos/contatos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/agenda/agenda.iml" filepath="$PROJECT_DIR$/agenda/agenda.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/proj-final-mod1-ada.iml" filepath="$PROJECT_DIR$/.idea/proj-final-mod1-ada.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testes/testes.iml" filepath="$PROJECT_DIR$/testes/testes.iml" />
     </modules>
   </component>
 </project>

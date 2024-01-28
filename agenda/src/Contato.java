@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Contato {
@@ -6,12 +7,13 @@ public class Contato {
     private String sobreNome;
     private List<Telefone> telefones;
 
-//    public Contato(Long id, String nome, String sobreNome, List<Telefone> telefones) {
-//        this.id = id;
-//        this.nome = nome;
-//        this.sobreNome = sobreNome;
-//        this.telefones = telefones;
-//    }
+
+    public Contato(Long id, String nome, String sobreNome, List<Telefone> telefones) {
+        this.id = id;
+        this.nome = nome;
+        this.sobreNome = sobreNome;
+        this.telefones = telefones;
+    }
 
     // MÉTODOS GET
     public Long getId() {
@@ -45,6 +47,10 @@ public class Contato {
         // Chama a função gerarID que percorre a lista em arquivo.
         // Verifica valor de id do último contato ao ler o primeiro item da última linha
         // Soma +1 a esse valor e retorna um long com valor de novo ID
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
     }
 
     // MÉTODO PARA SALVAR CONTATO EM ARQUIVO

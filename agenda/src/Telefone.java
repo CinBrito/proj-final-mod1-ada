@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Telefone {
     private Long id;
     private String ddd;
@@ -32,4 +36,10 @@ public class Telefone {
     public void setNumero(Long numero) {
         this.numero = numero;
     }
+
+    @Override
+    public String toString() {
+        return "(" + ddd + ") " + numero;
+    }
+
 }

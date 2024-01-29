@@ -8,13 +8,6 @@ public class Contato {
     private List<Telefone> telefones;
 
 
-    public Contato(Long id, String nome, String sobreNome, List<Telefone> telefones) {
-        this.id = id;
-        this.nome = nome;
-        this.sobreNome = sobreNome;
-        this.telefones = telefones;
-    }
-
     // MÉTODOS GET
     public Long getId() {
         return id;
@@ -53,11 +46,11 @@ public class Contato {
         this.telefones = telefones;
     }
 
-    // MÉTODO PARA SALVAR CONTATO EM ARQUIVO
-    public void salvarEmArquivo(String id, String nome, String sobreNome, List<Telefone> telefones) {
-        // concatenar dados numa linha divida por ;
 
-
+    @Override
+    public String toString() {
+        return id + " | " + nome + " " + sobreNome + " | " + telefones;
     }
 }
+
 

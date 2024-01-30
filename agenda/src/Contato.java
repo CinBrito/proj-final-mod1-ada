@@ -37,9 +37,6 @@ public class Contato {
 
     public void setId(Long id) {
         this.id = id;
-        // Chama a função gerarID que percorre a lista em arquivo.
-        // Verifica valor de id do último contato ao ler o primeiro item da última linha
-        // Soma +1 a esse valor e retorna um long com valor de novo ID
     }
 
     public void setTelefones(List<Telefone> telefones) {

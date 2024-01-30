@@ -9,7 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int opcao;
 
         while (true) {
             System.out.println("##### AGENDA #####");
@@ -22,21 +21,25 @@ public class Main {
             System.out.println("5 - Sair");
             System.out.println("Digite a opção desejada: ");
             String opcaoString = scanner.nextLine();
-            opcao = Integer.parseInt(opcaoString);
+            int opcao = 0;
+            try {
+                opcao = Integer.parseInt(opcaoString);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao converter a String para int. Certifique-se de que a String representa um número válido.");
+            }
+
+            // Não sei porquê ele não me deixa usar outros scanner.next senão String então desculpe pela
+            // quantidade de parse :)
 
             switch (opcao) {
                 case 1:
                     System.out.println("--------------");
                     agenda.listar();
-                    System.out.println("--------------");
                     break;
                 case 2:
                     Contato contato = new Contato();
 
                     contato.setId(gerarID(arquivo));
-//                    if (!agenda.verificarID(id)) {
-//                        continue;
-//                    }
 
                     System.out.println("Digite o primeiro nome:");
                     contato.setNome(scanner.nextLine());
@@ -67,21 +70,38 @@ public class Main {
 
                     agenda.adicionarAgenda(contato);
 
-//                    System.out.println(contato);
+                    agenda.adicionarNumero(contato);
 
                     System.out.println("Contato adicionado com sucesso!");
+
+//                    limpaTela();
                     break;
                 case 3:
                     System.out.print("ID do Contato para remover: ");
-                    Long idRemover = scanner.nextLong();
+                    Long idRemover = null;
+                    String idRemoverString = scanner.nextLine();
+                    try {
+                        idRemover = Long.parseLong(idRemoverString);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+                    }
                     agenda.removerContato(idRemover);
+//                    limpaTela();
                     break;
                 case 4:
                     System.out.println("Digite a ID do contato para edição: ");
-                    Long idEditar = scanner.nextLong();
+                    Long idEditar = null;
+                    String idEditarString = scanner.nextLine();
+                    try {
+                        idEditar = Long.parseLong(idEditarString);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+                    }
                     agenda.editarContato(idEditar);
+//                    limpaTela();
                     break;
                 case 5:
+//                    limpaTela();
                     System.out.println("Agradecimentos por utilizar a agenda!");
                     break;
                 default:
@@ -117,4 +137,24 @@ public class Main {
         }
         return idGerada;
     }
+
+//    public static void limpaTela() {
+//        String os = System.getProperty("os.name").toLowerCase();
+//
+//        ProcessBuilder processBuilder;
+//        if (os.contains("win")) {
+//            // Windows
+//            processBuilder = new ProcessBuilder("cmd", "/c", "cls");
+//        } else {
+//            // Unix/Linux/Mac
+//            processBuilder = new ProcessBuilder("clear");
+//        }
+//
+//        try {
+//            Process process = processBuilder.inheritIO().start();
+//            process.waitFor();
+//        } catch (IOException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

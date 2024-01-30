@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,20 +31,20 @@ public class Main {
                 case 2:
                     Contato contato = new Contato();
 
-                    //        contato.setId(gerarID(arquivo));
-                    System.out.println("Digite o id:");
-                    String idString = scanner.nextLine();
-                    Long id = null;
-                    try {
-                        id = Long.parseLong(idString);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
-                    }
-                    contato.setId(id);
+                    contato.setId(gerarID(arquivo));
+//                    System.out.println("Digite o id:");
+//                    String idString = scanner.nextLine();
+//                    Long id = null;
+//                    try {
+//                        id = Long.parseLong(idString);
+//                    } catch (NumberFormatException e) {
+//                        System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+//                    }
+//                    contato.setId(id);
 
-                    if (!agenda.verificarID(id)) {
-                        continue;
-                    }
+//                    if (!agenda.verificarID(id)) {
+//                        continue;
+//                    }
 
                     System.out.println("Digite o primeiro nome:");
                     contato.setNome(scanner.nextLine());
@@ -63,7 +66,7 @@ public class Main {
                         System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
                     }
 
-                    Telefone telefone = new Telefone(id, ddd, numTelefone);
+                    Telefone telefone = new Telefone(contato.getId(), ddd, numTelefone);
                     contato.getTelefones().add(telefone);
 
                     if (!agenda.verificarTelefone(numTelefone)) {
@@ -93,5 +96,34 @@ public class Main {
                     System.out.println("Opção Inválida");
             }
         }
+    }
+
+    static String arquivo = "agenda/src/listaDeContatos.txt";
+    public static long gerarID(String caminhoArquivo) {
+        String id = null;
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            while ((linha = bufferedReader.readLine()) != null) {
+                // Dividir a linha em um array usando ";" ou "/"
+                String[] array = linha.split("[;/]");
+
+                if (array.length > 0) {
+                    id = array[0];
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        long idGerada = 0;
+
+        try {
+            idGerada = Long.parseLong(id)+1;
+        } catch (NumberFormatException e) {
+            System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+        }
+
+        return idGerada;
     }
 }

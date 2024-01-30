@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class Agenda {
     private List<Contato> agenda;
@@ -16,58 +14,24 @@ public class Agenda {
     // LEITOR DE ARQUIVOS
     public void carregarContatos(String caminhoArquivo) {
         try {
-            // Criar um FileReader para ler o arquivo
             FileReader fileReader = new FileReader(caminhoArquivo);
-
-            // Criar um BufferedReader para ler linhas do arquivo
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            // Variável para armazenar a linha lida
             String linha;
-
-            // Ler e imprimir cada linha do arquivo
+            // Criar contato para cada linha do arquivo
             while ((linha = bufferedReader.readLine()) != null) {
                 Contato contato = ConversorLinhaPessoa.criarContato(linha);
                 agenda.add(contato);
             }
 
-            // Fechar o BufferedReader e o FileReader
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e) {
-            // Tratar exceções de leitura de arquivo
+            // Tratar exceções de leitura de arquivo (??)
             e.printStackTrace();
         }
     }
 
-    private long gerarID(String caminhoArquivo) {
-        String id = null;
-
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(caminhoArquivo))) {
-            String linha;
-            while ((linha = bufferedReader.readLine()) != null) {
-                // Dividir a linha em um array usando ";" ou "/"
-                String[] array = linha.split("[;/]");
-
-                // Atribuir o primeiro item do array à variável
-                if (array.length > 0) {
-                    id = array[0];
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        long idGerada = 0;
-
-        try {
-            idGerada = Long.parseLong(id + 1);
-        } catch (NumberFormatException e) {
-            System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
-        }
-
-        return idGerada;
-    }
 
     // MÉTODO PARA SALVAR CONTATO EM ARQUIVO
     private void salvarEmArquivo() {
@@ -107,6 +71,7 @@ public class Agenda {
     }
 
     public void editarContato(Long idEditar) {
+
     }
 
     public void listar() {
@@ -119,22 +84,20 @@ public class Agenda {
     public boolean verificarID(Long id) {
         for (Contato contato : agenda
              ) if (contato.getId().equals(id)) {
-            System.out.println("ID já exsitente. Operação cancelada.");
-            return false;
+                System.out.println("ID já exsitente. Operação cancelada.");
+                return false;
         }
         return true;
     }
 
-//    public boolean verificarTelefone(Long numTelefone) {
-//        Long numExistente = null;
-//        for (Contato contato : agenda
-//        ) contato.getTelefones();
-//
-//
-//
-//        if (numTelefone.equals(numExistente)) {
-//            return false;
-//        }
-//        return true;
-//    }
+    public boolean verificarTelefone(Long numTelefone) {
+        for (Contato contato : agenda
+        ) for (Telefone telefone : contato.getTelefones()){
+            if (telefone.getNumero().equals(numTelefone)) {
+                System.out.println("Telefone já exsitente. Operação cancelada.");
+                return false;
+            }
+        }
+        return true;
+    }
 }

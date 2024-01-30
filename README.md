@@ -19,3 +19,11 @@ Bem-vindo ao projeto de Agenda Telefônica em Java! Este projeto foi desenvolvid
 1. Clone este repositório em sua máquina local.
    ```bash
    git clone https://github.com/seu-usuario/agenda-telefonica-java.git
+
+2. Abra o projeto em seu ambiente de desenvolvimento Java favorito.
+3. Execute a aplicação Java.
+<br>
+
+<strong> 🚀 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou propor melhorias.</strong>
+
+

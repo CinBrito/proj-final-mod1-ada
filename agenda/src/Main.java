@@ -26,22 +26,14 @@ public class Main {
 
             switch (opcao) {
                 case 1:
+                    System.out.println("--------------");
                     agenda.listar();
+                    System.out.println("--------------");
                     break;
                 case 2:
                     Contato contato = new Contato();
 
                     contato.setId(gerarID(arquivo));
-//                    System.out.println("Digite o id:");
-//                    String idString = scanner.nextLine();
-//                    Long id = null;
-//                    try {
-//                        id = Long.parseLong(idString);
-//                    } catch (NumberFormatException e) {
-//                        System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
-//                    }
-//                    contato.setId(id);
-
 //                    if (!agenda.verificarID(id)) {
 //                        continue;
 //                    }
@@ -123,7 +115,6 @@ public class Main {
         } catch (NumberFormatException e) {
             System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
         }
-
         return idGerada;
     }
 }

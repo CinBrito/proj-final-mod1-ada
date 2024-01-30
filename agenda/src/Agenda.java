@@ -73,39 +73,46 @@ public class Agenda {
 
     public void editarContato(Long idEditar) {
         Scanner scanner = new Scanner(System.in);
+        Contato contatoEditar = null;
 
         for (Contato contato : agenda) {
             if (contato.getId().equals(idEditar)) {
-                System.out.println("Digite novo nome: ");
-                contato.setNome(scanner.nextLine());
-                System.out.println("Digite novo sobrenome: ");
-                contato.setSobreNome(scanner.nextLine());
-
-                contato.getTelefones().clear();
-                System.out.println("Digite o DDD do número:");
-                String ddd = scanner.nextLine();
-
-                System.out.println("Digite o número de telefone:");
-                String numTelefoneString = scanner.nextLine();
-                Long numTelefone = null;
-                try {
-                    numTelefone = Long.parseLong(numTelefoneString);
-                } catch (NumberFormatException e) {
-                    System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
-                }
-
-                if (verificarTelefone(numTelefone)) {
-                    Telefone telefone = new Telefone(contato.getId(), ddd, numTelefone);
-                    contato.getTelefones().add(telefone);
-                    adicionarNumero(contato);
-                    salvarEmArquivo();
-                    System.out.println("Contato editado com sucesso!");
-                } else {
-                    System.out.println("Tente alterar o contato novamente!");
-                    System.out.println("----------------------------------");
-                    break;
-                }
+                contatoEditar = contato;
+                break;
             }
+        }
+
+        if (contatoEditar != null) {
+            System.out.println("Digite novo nome: ");
+            contatoEditar.setNome(scanner.nextLine());
+            System.out.println("Digite novo sobrenome: ");
+            contatoEditar.setSobreNome(scanner.nextLine());
+
+            contatoEditar.getTelefones().clear();
+            System.out.println("Digite o DDD do número:");
+            String ddd = scanner.nextLine();
+
+            System.out.println("Digite o número de telefone:");
+            String numTelefoneString = scanner.nextLine();
+            Long numTelefone = null;
+            try {
+                numTelefone = Long.parseLong(numTelefoneString);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+            }
+
+            if (verificarTelefone(numTelefone)) {
+                Telefone telefone = new Telefone(contatoEditar.getId(), ddd, numTelefone);
+                contatoEditar.getTelefones().add(telefone);
+                adicionarNumero(contatoEditar);
+                salvarEmArquivo();
+                System.out.println("Contato editado com sucesso!");
+            } else {
+                System.out.println("Tente alterar o contato novamente!");
+                System.out.println("----------------------------------");
+            }
+        } else {
+            System.out.println("Contato não encontrado.");
         }
     }
 

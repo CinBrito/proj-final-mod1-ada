@@ -98,7 +98,7 @@ public class Agenda {
             try {
                 numTelefone = Long.parseLong(numTelefoneString);
             } catch (NumberFormatException e) {
-                System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+                System.out.println("Erro ao tratar valor. Certifique-se de que um valor válido foi inserido.");
             }
 
             if (verificarTelefone(numTelefone)) {
@@ -136,13 +136,20 @@ public class Agenda {
                 try {
                     idAcessar = Long.parseLong(idAcessarString);
                 } catch (NumberFormatException e) {
-                    System.out.println("Erro ao converter a String para long. Certifique-se de que a String representa um número válido.");
+                    System.out.println("Erro ao tratar valor. Certifique-se de que um valor válido foi inserido.");
                 }
                 Contato contatoAcessar = null;
-                for (Contato contato : agenda) {
-                    if (contato.getId().equals(idAcessar)) contatoAcessar = contato;
+                    for (Contato contato : agenda) {
+                        if (contato.getId().equals(idAcessar)) {
+                            contatoAcessar = contato;
+                        }
+                    }
+
+                if (contatoAcessar == null) { //throw new AssertionError("Contato não existente. Certifique-se de que um valor válido foi inserido.");
+                    System.out.println("Contato não existente. Certifique-se de que um valor válido foi inserido.");
+                    continue;
                 }
-                assert contatoAcessar != null;
+
                 System.out.println("------------------------");
                 System.out.println("ID: " + contatoAcessar.getId() + "\n" +
                         "Nome: " + contatoAcessar.getNome() + " " + contatoAcessar.getSobreNome() + "\n" +
